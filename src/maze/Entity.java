@@ -36,13 +36,12 @@ public class Entity {
     /**
      * The size of this entity, this is used to calculate collisions with walls
      */
-    private float sizeX = 0.3f;
-    private float sizeY = 0.3f;
+    private float sizeX = 0.32f;
+    private float sizeY = 0.32f;
     private int flast = 10;
 
     private String player;
     private int ani;
-    private final static double SCALE = 0.5;
 
     /**
      * Create a new entity in the game
@@ -103,16 +102,16 @@ public class Entity {
         // the player to see whether we're at an invalid location
         // if any of them are blocked then the location specified
         // isn't valid
-        if (maze.blocked(nx - sizeX, ny + (float)(0.1 * SCALE))) {
+        if (maze.blocked(nx - sizeX, ny + (float) 0.1)) {
             return false;
         }
-        if (maze.blocked(nx + sizeX, ny + (float)(0.1 * SCALE))) {
+        if (maze.blocked(nx + sizeX, ny + (float) 0.1)) {
             return false;
         }
-        if (maze.blocked(nx - sizeX, ny + (float)(0.57 * SCALE))) {
+        if (maze.blocked(nx - sizeX, ny + (float) 0.57)) {
             return false;
         }
-        if (maze.blocked(nx + sizeX, ny + (float)(0.57 * SCALE))) {
+        if (maze.blocked(nx + sizeX, ny + (float) 0.57)) {
             return false;
         }
 
@@ -144,8 +143,6 @@ public class Entity {
                 g.drawImage(sprites[0][(int) (this.ani/flast)],
                         (xp - sprites[0][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[0][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[0][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[0][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -153,8 +150,6 @@ public class Entity {
                 g.drawImage(sprites[1][(int) (this.ani/flast)],
                         (xp - sprites[1][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[1][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[1][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[1][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -162,8 +157,6 @@ public class Entity {
                 g.drawImage(sprites[2][(int) (this.ani/flast)],
                         (xp - sprites[2][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[2][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[2][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[2][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -171,8 +164,6 @@ public class Entity {
                 g.drawImage(sprites[3][(int) (this.ani/flast)],
                         (xp - sprites[3][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[3][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[3][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[3][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -180,8 +171,6 @@ public class Entity {
                 g.drawImage(sprites[4][(int) (this.ani/flast)],
                         (xp - sprites[4][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[4][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[4][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[4][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -189,8 +178,6 @@ public class Entity {
                 g.drawImage(sprites[5][(int) (this.ani/flast)],
                         (xp - sprites[5][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[5][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[5][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[5][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -198,8 +185,6 @@ public class Entity {
                 g.drawImage(sprites[6][(int) (this.ani/flast)],
                         (xp - sprites[6][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[6][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[6][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[6][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -207,8 +192,6 @@ public class Entity {
                 g.drawImage(sprites[7][(int) (this.ani/flast)],
                         (xp - sprites[7][(int) (this.ani/flast)].getWidth(null) / 2),
                         (yp - sprites[7][(int) (this.ani/flast)].getHeight(null) / 2),
-                        (int)((sprites[7][(int) (this.ani/flast)].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[7][(int) (this.ani/flast)].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -232,8 +215,6 @@ public class Entity {
                 g.drawImage(sprites[0][0],
                         (xp - sprites[0][0].getWidth(null) / 2),
                         (yp - sprites[0][0].getHeight(null) / 2),
-                        (int)((sprites[0][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[0][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -241,8 +222,6 @@ public class Entity {
                 g.drawImage(sprites[1][0],
                         (xp - sprites[1][0].getWidth(null) / 2),
                         (yp - sprites[1][0].getHeight(null) / 2),
-                        (int)((sprites[1][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[1][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -250,8 +229,6 @@ public class Entity {
                 g.drawImage(sprites[2][0],
                         (xp - sprites[2][0].getWidth(null) / 2),
                         (yp - sprites[2][0].getHeight(null) / 2),
-                        (int)((sprites[2][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[2][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -259,8 +236,6 @@ public class Entity {
                 g.drawImage(sprites[3][0],
                         (xp - sprites[3][0].getWidth(null) / 2),
                         (yp - sprites[3][0].getHeight(null) / 2),
-                        (int)((sprites[3][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[3][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -268,8 +243,6 @@ public class Entity {
                 g.drawImage(sprites[4][0],
                         (xp - sprites[4][0].getWidth(null) / 2),
                         (yp - sprites[4][0].getHeight(null) / 2),
-                        (int)((sprites[4][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[4][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -277,8 +250,6 @@ public class Entity {
                 g.drawImage(sprites[5][0],
                         (xp - sprites[5][0].getWidth(null) / 2),
                         (yp - sprites[5][0].getHeight(null) / 2),
-                        (int)((sprites[5][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[5][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -286,8 +257,6 @@ public class Entity {
                 g.drawImage(sprites[6][0],
                         (xp - sprites[6][0].getWidth(null) / 2),
                         (yp - sprites[6][0].getHeight(null) / 2),
-                        (int)((sprites[6][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[6][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -295,8 +264,6 @@ public class Entity {
                 g.drawImage(sprites[7][0],
                         (xp - sprites[7][0].getWidth(null) / 2),
                         (yp - sprites[7][0].getHeight(null) / 2),
-                        (int)((sprites[7][0].getWidth(null) / 2)*SCALE),
-                        (int)((sprites[7][0].getHeight(null) / 2)*SCALE),
                         null);
                 break;
             }
@@ -363,9 +330,5 @@ public class Entity {
             }
         }
         return sprites;
-    }
-
-    public static double getSCALE() {
-        return SCALE;
     }
 }
