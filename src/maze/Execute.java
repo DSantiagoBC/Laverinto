@@ -44,7 +44,7 @@ public class Execute extends Canvas implements KeyListener {
     /**
      * The player entity that will be controlled with cursors
      */
-    private Entity player;
+    private Entity player1, player2;
 
     /**
      * Create the simple game - this also starts the game loop
@@ -57,9 +57,9 @@ public class Execute extends Canvas implements KeyListener {
         // and not resizable - this just gives us less to account for
         Frame frame = new Frame("Maze Runners!");
         frame.setLayout(null);
-        setBounds(0, 0, 1500, 1500);
+        setBounds(0, 0, 1200, 1200);
         frame.add(this);
-        frame.setSize(1500, 1500);
+        frame.setSize(1200, 1200);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
 
@@ -87,18 +87,14 @@ public class Execute extends Canvas implements KeyListener {
 
         // create our game objects, a map for the player to wander around
         // and an entity to represent out player
-        maze = new CanvasMaze();
-        player = new Entity(maze, "PJ1", 1.5f*(float)(1/Entity.getSCALE()), 1.4f*(float)(1/Entity.getSCALE()));
+        maze = new CanvasMaze(0, 0);
+        player1 = new Entity(maze, "PJ1", 1.5f, 1.1f);
+        player2 = new Entity(maze, "PJ2", (float) (-1 + maze.getTotalWIDTH() * 2 - 1.5), 1.1f);
 
         // start the game loop
-        player.fillSprites();
+        player1.fillSprites();
+        player2.fillSprites();
         gameLoop();
-    }
-
-    protected Image loadImage(String imageName) {
-        ImageIcon ii = new ImageIcon(imageName);
-        Image image = ii.getImage();
-        return image;
     }
 
     /**
@@ -119,14 +115,15 @@ public class Execute extends Canvas implements KeyListener {
             g.fillRect(0, 0, 1500, 1500);
 
             // render our game objects
-            g.translate(0, 25);
+            g.translate(100, 125);
             maze.paint(g);
-            if(left||right||up||down)
-                player.paint(g);
-            else{
-                player.paintframe(g);
+            if (left || right || up || down) {
+                player1.paint(g);
+                player2.paint(g);
+            } else {
+                player1.paintframe(g);
+                player2.paintframe(g);
             }
-
             // flip the buffer so we can see the rendering
             g.dispose();
             strategy.show();
@@ -188,7 +185,9 @@ public class Execute extends Canvas implements KeyListener {
         // based on the keys multiplied by the amount of time that's
         // passed
         if ((dx != 0) || (dy != 0)) {
-            player.move(dx * delta * 0.003f,
+            player1.move(dx * delta * 0.003f,
+                    dy * delta * 0.003f);
+            player2.move(dx * delta * 0.003f,
                     dy * delta * 0.003f);
         }
     }

@@ -21,6 +21,15 @@ public class Entity {
      * The y position of this entity in terms of grid cells
      */
     private float y;
+
+    /**
+     * The x position of this entity in terms of grid cells
+     */
+    private float startX;
+    /**
+     * The y position of this entity in terms of grid cells
+     */
+    private float startY;
     /**
      * The sprites to draw for this entity
      */
@@ -54,7 +63,9 @@ public class Entity {
         this.maze = maze;
         this.player = player;
         this.x = x;
+        this.startX = x;
         this.y = y;
+        this.startY = y;
         this.ani = 1;
     }
 
@@ -83,9 +94,10 @@ public class Entity {
 
             return true;
         }
+        x = this.startX;
+        y = this.startY;
 
-        // if it wasn't a valid move don't do anything apart from 
-        // tell the caller
+        // if it wasn't a valid move return tha player to the begining
         return false;
     }
 
@@ -102,16 +114,16 @@ public class Entity {
         // the player to see whether we're at an invalid location
         // if any of them are blocked then the location specified
         // isn't valid
-        if (maze.blocked(nx - sizeX, ny + (float) 0.1)) {
+        if (maze.blocked(nx - sizeX, ny + (float) 0.2)) {
             return false;
         }
-        if (maze.blocked(nx + sizeX, ny + (float) 0.1)) {
+        if (maze.blocked(nx + sizeX, ny + (float) 0.2)) {
             return false;
         }
-        if (maze.blocked(nx - sizeX, ny + (float) 0.57)) {
+        if (maze.blocked(nx - sizeX, ny + (float) 0.8)) {
             return false;
         }
-        if (maze.blocked(nx + sizeX, ny + (float) 0.57)) {
+        if (maze.blocked(nx + sizeX, ny + (float) 0.8)) {
             return false;
         }
 
