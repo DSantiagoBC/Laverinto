@@ -21,21 +21,9 @@ public class Execute extends Canvas implements KeyListener {
     private BufferStrategy strategy;
 
     /**
-     * True if the left key is currently pressed
+     * True if the key is currently pressed
      */
-    private boolean left;
-    /**
-     * True if the right key is currently pressed
-     */
-    private boolean right;
-    /**
-     * True if the up key is currently pressed
-     */
-    private boolean up;
-    /**
-     * True if the down key is currently pressed
-     */
-    private boolean down;
+    private boolean left, right, up, down, w, a, s, d;
 
     /**
      * The map our player will wander round
@@ -51,7 +39,7 @@ public class Execute extends Canvas implements KeyListener {
      */
     private Image win;
     private Image loose;
-    
+
     private final static int FRAME_WIDTH = 856;
     private final static int FRAME_HEIGHT = 720;
 
@@ -94,8 +82,8 @@ public class Execute extends Canvas implements KeyListener {
         // create our game objects, a map for the player to wander around
         // and an entity to represent out player
         maze = new CanvasMaze(0, 0, 5, 8);
-        player1 = new Entity(maze, "PJ1", 1.5f, 1.1f);
-        player2 = new Entity(maze, "PJ2", (float) (-1 + maze.getTotalWIDTH() * 2 - 1.5), 1.1f);
+        player1 = new Entity(maze, "PJ1", (float) (-1 + maze.getTotalWIDTH() * 2 - 1.5), 1.1f);
+        player2 = new Entity(maze, "PJ2", 1.5f, 1.1f);
         // start the game loop
         player1.fillSprites();
         player2.fillSprites();
@@ -129,22 +117,34 @@ public class Execute extends Canvas implements KeyListener {
             maze.paint(g);
             if (left || right || up || down) {
                 player1.paint(g);
-                player2.paint(g);
             } else {
                 player1.paintframe(g);
+            }
+            if (w || a || s || d) {
+                player2.paint(g);
+            } else {
                 player2.paintframe(g);
             }
             if (player1.isWinner()) {
                 gameRunning = false;
                 g.setColor(Color.GREEN);
-                g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-                System.out.println(this.win.getWidth(null) + " " + this.win.getHeight(null));
-                g.drawImage(this.win, FRAME_WIDTH/2 - this.win.getWidth(null)/2, FRAME_HEIGHT/2 - this.win.getHeight(null)/2, null);
+                g.fillRect(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
+                g.drawImage(this.win, FRAME_WIDTH * 3 / 4 - this.win.getWidth(null) / 2
+                        , FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
+                g.setColor(Color.RED);
+                g.fillRect(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
+                g.drawImage(this.loose, FRAME_WIDTH / 4 - this.loose.getWidth(null) / 2
+                        , FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
             } else if (player2.isWinner()) {
                 gameRunning = false;
                 g.setColor(Color.RED);
-                g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
-                g.drawImage(this.loose, FRAME_WIDTH/2 - this.loose.getWidth(null)/2, FRAME_HEIGHT/2 - this.loose.getHeight(null)/2, null);
+                g.fillRect(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
+                g.drawImage(this.loose, FRAME_WIDTH * 3 / 4 - this.loose.getWidth(null) / 2
+                        , FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
+                g.setColor(Color.GREEN);
+                g.fillRect(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
+                g.drawImage(this.win, FRAME_WIDTH / 4 - this.win.getWidth(null) / 2
+                        , FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
             }
             // flip the buffer so we can see the rendering
             g.dispose();
@@ -188,29 +188,45 @@ public class Execute extends Canvas implements KeyListener {
     public void logic(long delta) {
         // check the keyboard and record which way the player
         // is trying to move this loop
-        float dx = 0;
-        float dy = 0;
+        float dx1 = 0;
+        float dy1 = 0;
+        float dx2 = 0;
+        float dy2 = 0;
         if (left) {
-            dx--;
+            dx1--;
         }
         if (right) {
-            dx++;
+            dx1++;
         }
         if (up) {
-            dy--;
+            dy1--;
         }
         if (down) {
-            dy++;
+            dy1++;
+        }
+        if (a) {
+            dx2--;
+        }
+        if (d) {
+            dx2++;
+        }
+        if (w) {
+            dy2--;
+        }
+        if (s) {
+            dy2++;
         }
 
         // if the player needs to move, attempt to move the entity
         // based on the keys multiplied by the amount of time that's
         // passed
-        if ((dx != 0) || (dy != 0)) {
-            player1.move(dx * delta * 0.003f,
-                    dy * delta * 0.003f);
-            player2.move(dx * delta * 0.003f,
-                    dy * delta * 0.003f);
+        if ((dx1 != 0) || (dy1 != 0)) {
+            player1.move(dx1 * delta * 0.003f,
+                    dy1 * delta * 0.003f);
+        }
+        if ((dx2 != 0) || (dy2 != 0)) {
+            player2.move(dx2 * delta * 0.003f,
+                    dy2 * delta * 0.003f);
         }
     }
 
@@ -241,6 +257,18 @@ public class Execute extends Canvas implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             up = true;
         }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            a = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            d = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            w = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            s = true;
+        }
     }
 
     /**
@@ -261,6 +289,18 @@ public class Execute extends Canvas implements KeyListener {
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             up = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            a = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            d = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            w = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            s = false;
         }
     }
 

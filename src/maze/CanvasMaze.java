@@ -48,6 +48,8 @@ public class CanvasMaze {
 
                 // draw the rectangle with a dark outline
                 g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                g2d.setColor(g2d.getColor().darker());
+                g2d.drawRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
 
@@ -70,6 +72,8 @@ public class CanvasMaze {
 
                 // draw the rectangle with a dark outline
                 g2d.fillRect((x + getTotalWIDTH() - 1) * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                g2d.setColor(g2d.getColor().darker());
+                g2d.drawRect((x + getTotalWIDTH() - 1) * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
 
