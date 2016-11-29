@@ -51,6 +51,7 @@ public class Entity {
 
     private String player;
     private int ani;
+    private boolean winner;
 
     /**
      * Create a new entity in the game
@@ -67,6 +68,7 @@ public class Entity {
         this.y = y;
         this.startY = y;
         this.ani = 1;
+        this.winner = false;
     }
 
     /**
@@ -114,6 +116,11 @@ public class Entity {
         // the player to see whether we're at an invalid location
         // if any of them are blocked then the location specified
         // isn't valid
+        
+        if((int)(ny + (float) 0.2) > maze.getTotalHEIGHT() - 2){
+            this.winner = true;
+            return true;
+        }
         if (maze.blocked(nx - sizeX, ny + (float) 0.2)) {
             return false;
         }
@@ -343,4 +350,9 @@ public class Entity {
         }
         return sprites;
     }
+
+    public boolean isWinner() {
+        return winner;
+    }
+    
 }

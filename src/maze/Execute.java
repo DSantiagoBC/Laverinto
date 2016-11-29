@@ -49,6 +49,12 @@ public class Execute extends Canvas implements KeyListener {
     /**
      * Create the simple game - this also starts the game loop
      */
+    private Image win;
+    private Image loose;
+    
+    private final static int FRAME_WIDTH = 856;
+    private final static int FRAME_HEIGHT = 720;
+
     public Execute() {
         // right, I'm going to explain this in detail since it always seems to 
         // confuse. 
@@ -57,9 +63,9 @@ public class Execute extends Canvas implements KeyListener {
         // and not resizable - this just gives us less to account for
         Frame frame = new Frame("Maze Runners!");
         frame.setLayout(null);
-        setBounds(0, 0, 1200, 1200);
+        setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
         frame.add(this);
-        frame.setSize(1200, 1200);
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
 
@@ -87,10 +93,9 @@ public class Execute extends Canvas implements KeyListener {
 
         // create our game objects, a map for the player to wander around
         // and an entity to represent out player
-        maze = new CanvasMaze(0, 0);
+        maze = new CanvasMaze(0, 0, 5, 8);
         player1 = new Entity(maze, "PJ1", 1.5f, 1.1f);
         player2 = new Entity(maze, "PJ2", (float) (-1 + maze.getTotalWIDTH() * 2 - 1.5), 1.1f);
-
         // start the game loop
         player1.fillSprites();
         player2.fillSprites();
@@ -105,17 +110,22 @@ public class Execute extends Canvas implements KeyListener {
     public void gameLoop() {
         boolean gameRunning = true;
         long last = System.nanoTime();
+        Graphics2D g;
+        ImageIcon win = new ImageIcon("pictures/MSGs/win.png");
+        this.win = win.getImage();
+        ImageIcon loose = new ImageIcon("pictures/MSGs/loose.png");
+        this.loose = loose.getImage();
 
         // keep looking while the game is running
         while (gameRunning) {
-            Graphics2D g = (Graphics2D) strategy.getDrawGraphics();
+            g = (Graphics2D) strategy.getDrawGraphics();
 
             // clear the screen
-            g.setColor(Color.black);
-            g.fillRect(0, 0, 1500, 1500);
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 
             // render our game objects
-            g.translate(100, 125);
+            g.translate(8, 32);
             maze.paint(g);
             if (left || right || up || down) {
                 player1.paint(g);
@@ -123,6 +133,18 @@ public class Execute extends Canvas implements KeyListener {
             } else {
                 player1.paintframe(g);
                 player2.paintframe(g);
+            }
+            if (player1.isWinner()) {
+                gameRunning = false;
+                g.setColor(Color.GREEN);
+                g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+                System.out.println(this.win.getWidth(null) + " " + this.win.getHeight(null));
+                g.drawImage(this.win, FRAME_WIDTH/2 - this.win.getWidth(null)/2, FRAME_HEIGHT/2 - this.win.getHeight(null)/2, null);
+            } else if (player2.isWinner()) {
+                gameRunning = false;
+                g.setColor(Color.RED);
+                g.fillRect(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
+                g.drawImage(this.loose, FRAME_WIDTH/2 - this.loose.getWidth(null)/2, FRAME_HEIGHT/2 - this.loose.getHeight(null)/2, null);
             }
             // flip the buffer so we can see the rendering
             g.dispose();

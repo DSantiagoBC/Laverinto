@@ -8,11 +8,11 @@ public class CanvasMaze {
     /**
      * The width in grid cells of our Maze
      */
-    private int WIDTH = 5;
+    private int WIDTH;
     /**
      * The height in grid cells of our Maze
      */
-    private int HEIGHT = 5;
+    private int HEIGHT;
     /**
      * The rendered size of the tile (in pixels)
      */
@@ -21,11 +21,13 @@ public class CanvasMaze {
     private ArrayList<Rectangle> paredes;
     private boolean[][] mazeWalls1, mazeWalls2;
 
-    public CanvasMaze(int startX, int startY) {
+    public CanvasMaze(int startX, int startY, int width, int height) {
+        this.paredes = new ArrayList<>();
+        this.WIDTH = width;
+        this.HEIGHT = height;
         this.maze = new RecursiveBacktracker(WIDTH, HEIGHT, startX, startY);
         this.maze.generate();
         this.maze.print(System.out);
-        this.paredes = new ArrayList<>();
     }
 
     public void paint(Graphics2D g2d) {
@@ -46,10 +48,6 @@ public class CanvasMaze {
 
                 // draw the rectangle with a dark outline
                 g2d.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                if (mazeWalls1[x][y]) {
-                    g2d.setColor(g2d.getColor().darker());
-                }
-                g2d.drawRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
 
@@ -62,13 +60,16 @@ public class CanvasMaze {
                 if (mazeWalls2[x][y]) {
                     g2d.setColor(Color.GRAY);
                 }
+                if (x == 0 && y == getTotalHEIGHT() - 2) {
+                    g2d.setColor(Color.DARK_GRAY);
+                }
+                if (x == 0 && y == getTotalHEIGHT() - 1) {
+                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.setColor(g2d.getColor().brighter());
+                }
 
                 // draw the rectangle with a dark outline
-                g2d.fillRect((x + getTotalWIDTH()-1) * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-                if (mazeWalls2[x][y]) {
-                    g2d.setColor(g2d.getColor().darker());
-                }
-                g2d.drawRect((x + getTotalWIDTH()-1) * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                g2d.fillRect((x + getTotalWIDTH() - 1) * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
 
@@ -120,9 +121,16 @@ public class CanvasMaze {
     public boolean blocked(float x, float y) {
         // look up the right cell (based on simply rounding the floating
         // values) and check the value
-        if((int)x < getTotalWIDTH())
+        if ((int) x == getTotalWIDTH() - 1 && (int) y == getTotalHEIGHT() - 2) {
+            return false;
+        }
+        if ((int) x == getTotalWIDTH() - 1 && (int) y == getTotalHEIGHT() - 1) {
+            return false;
+        }
+        if ((int) x < getTotalWIDTH()) {
             return mazeWalls1[(int) x][(int) y];
-        return mazeWalls2[(int)x - getTotalWIDTH() + 1][(int)y];
+        }
+        return mazeWalls2[(int) x - getTotalWIDTH() + 1][(int) y];
     }
 
     public void setSize(int WIDTH, int HEIGHT) {
@@ -142,10 +150,14 @@ public class CanvasMaze {
         boolean[][] inverted = new boolean[getTotalWIDTH()][getTotalHEIGHT()];
         for (int y = 0; y < getTotalHEIGHT(); y++) {
             for (int x = 0; x < getTotalWIDTH(); x++) {
-                    inverted[x][y] = arr[getTotalWIDTH() - x - 1][y];
+                inverted[x][y] = arr[getTotalWIDTH() - x - 1][y];
             }
         }
 
         return inverted;
+    }
+
+    public int getTILE_SIZE() {
+        return TILE_SIZE;
     }
 }

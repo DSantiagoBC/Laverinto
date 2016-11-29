@@ -86,7 +86,7 @@ public abstract class MazeGenerator {
      */
     protected MazeGenerator(int width, int height) {
         if (width <= 0 || height <= 0) {
-            throw new IllegalArgumentException("Size must be positive");
+            throw new IllegalArgumentException("Size must be positive " + width + " " + height);
         }
 
         this.width = width;
