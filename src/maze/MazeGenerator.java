@@ -21,7 +21,6 @@ public abstract class MazeGenerator {
         maze.generate();
         maze.print(System.out);
     }*/
-
     /**
      * Represents UP.
      */
@@ -254,6 +253,45 @@ public abstract class MazeGenerator {
     }
 
     /**
+     * Prints the maze. The following characters are used for each part.
+     * <ul>
+     * <li><code>'-'</code> for horizontal walls</li>
+     * <li><code>'|'</code> for vertical walls</li>
+     * <li><code>'*'</code> for the corner fillers</li>
+     * </ul>
+     *
+     * @param out the target {@link PrintStream}
+     */
+    public void print(PrintStream out) {
+        for (int y = 0; y < height; y++) {
+            // Print a row of horizontal walls
+
+            int rowBase = y * width;
+            for (int x = 0; x < width; x++) {
+                out.print('*');
+                out.print(horizWalls[rowBase + x] ? " - " : "   ");
+            }
+            out.println('*');
+
+            // Print a row of vertical walls
+            rowBase = y * (width + 1);
+            for (int x = 0; x < width; x++) {
+                out.print(vertWalls[rowBase + x] ? "|" : " ");
+                out.print("   ");
+            }
+            out.println(vertWalls[rowBase + width] ? "|" : " ");
+        }
+
+        // Print the last row of horizontal walls
+        int rowBase = height * width;
+        for (int x = 0; x < width; x++) {
+            out.print('*');
+            out.print(horizWalls[rowBase + x] ? " - " : "   ");
+        }
+        out.println('*');
+    }
+
+    /**
      * Gets the maze width, in cells.
      *
      * @return the maze width in cells.
@@ -279,43 +317,4 @@ public abstract class MazeGenerator {
         return vertWalls;
     }
 
-    /**
-     * Prints the maze. The following characters are used for each part.
-     * <ul>
-     * <li><code>'-'</code> for horizontal walls</li>
-     * <li><code>'|'</code> for vertical walls</li>
-     * <li><code>'*'</code> for the corner fillers</li>
-     * </ul>
-     *
-     * @param out the target {@link PrintStream}
-     */
-    public void print(PrintStream out) {
-        for (int y = 0; y < height; y++) {
-            // Print a row of horizontal walls
-
-            int rowBase = y * width;
-            for (int x = 0; x < width; x++) {
-                out.print('*'/*'.'*/);
-                out.print(horizWalls[rowBase + x] ? " - " : "   ");
-            }
-            out.println('*'/*'.'*/);
-
-            // Print a row of vertical walls
-            rowBase = y * (width + 1);
-            for (int x = 0; x < width; x++) {
-                out.print(vertWalls[rowBase + x] ? "|" : " ");
-                out.print("   ");
-            }
-            out.println(vertWalls[rowBase + width] ? "|" : " ");
-        }
-
-        // Print the last row of horizontal walls
-        int rowBase = height * width;
-        for (int x = 0; x < width; x++) {
-            out.print('*'/*'.'*/);
-            out.print(horizWalls[rowBase + x] ? " - " : "   ");
-        }
-        out.println('*'/*'.'*/);
-    }
-    
 }

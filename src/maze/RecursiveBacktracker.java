@@ -69,7 +69,7 @@ public class RecursiveBacktracker extends MazeGenerator {
         LinkedList<Cell> stack = new LinkedList<>();
 
         Cell cell = new Cell(startX, startY);
-        
+
         stack.addFirst(cell);
         int[] neighbours = new int[4];
 

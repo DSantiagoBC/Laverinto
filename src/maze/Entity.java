@@ -116,8 +116,8 @@ public class Entity {
         // the player to see whether we're at an invalid location
         // if any of them are blocked then the location specified
         // isn't valid
-        
-        if((int)(ny + (float) 0.2) > maze.getTotalHEIGHT() - 2){
+
+        if ((int) (ny + (float) 0.2) > maze.getTotalHEIGHT() - 2) {
             this.winner = true;
             return true;
         }
@@ -156,61 +156,61 @@ public class Entity {
         if (this.ani == 4 * flast) {
             this.ani = 1;
         }
-        int ang = (int)((this.ang/Math.PI) * 100);
+        int ang = (int) ((this.ang / Math.PI) * 100);
         switch (ang) {
             case 0: {
-                g.drawImage(sprites[0][(int) (this.ani/flast)],
-                        (xp - sprites[0][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[0][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[0][(int) (this.ani / flast)],
+                        (xp - sprites[0][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[0][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case -25: {
-                g.drawImage(sprites[1][(int) (this.ani/flast)],
-                        (xp - sprites[1][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[1][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[1][(int) (this.ani / flast)],
+                        (xp - sprites[1][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[1][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case -50: {
-                g.drawImage(sprites[2][(int) (this.ani/flast)],
-                        (xp - sprites[2][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[2][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[2][(int) (this.ani / flast)],
+                        (xp - sprites[2][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[2][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case -75: {
-                g.drawImage(sprites[3][(int) (this.ani/flast)],
-                        (xp - sprites[3][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[3][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[3][(int) (this.ani / flast)],
+                        (xp - sprites[3][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[3][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case -100: {
-                g.drawImage(sprites[4][(int) (this.ani/flast)],
-                        (xp - sprites[4][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[4][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[4][(int) (this.ani / flast)],
+                        (xp - sprites[4][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[4][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case -125: {
-                g.drawImage(sprites[5][(int) (this.ani/flast)],
-                        (xp - sprites[5][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[5][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[5][(int) (this.ani / flast)],
+                        (xp - sprites[5][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[5][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case 50: {
-                g.drawImage(sprites[6][(int) (this.ani/flast)],
-                        (xp - sprites[6][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[6][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[6][(int) (this.ani / flast)],
+                        (xp - sprites[6][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[6][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
             case 25: {
-                g.drawImage(sprites[7][(int) (this.ani/flast)],
-                        (xp - sprites[7][(int) (this.ani/flast)].getWidth(null) / 2),
-                        (yp - sprites[7][(int) (this.ani/flast)].getHeight(null) / 2),
+                g.drawImage(sprites[7][(int) (this.ani / flast)],
+                        (xp - sprites[7][(int) (this.ani / flast)].getWidth(null) / 2),
+                        (yp - sprites[7][(int) (this.ani / flast)].getHeight(null) / 2),
                         null);
                 break;
             }
@@ -219,7 +219,7 @@ public class Entity {
         this.ani++;
     }
 
-    void paintframe(Graphics2D g) {
+    void paintFrame(Graphics2D g) {
         // work out the screen position of the entity based on the
         // x/y position and the size that tiles are being rendered at. So
         // if we're at 1.5,1.5 and the tile size is 10 we'd render on screen 
@@ -228,7 +228,7 @@ public class Entity {
         int yp = (int) (CanvasMaze.TILE_SIZE * y);
         // rotate the sprite based on the current angle and then
         // draw it
-        int ang = (int)((this.ang/Math.PI) * 100);
+        int ang = (int) ((this.ang / Math.PI) * 100);
         switch (ang) {
             case 0: {
                 g.drawImage(sprites[0][0],
@@ -333,10 +333,10 @@ public class Entity {
                         direction = "F";
 
                 }
-                imagePath[i][j] = "pictures/" 
-                        + this.player 
-                        + "/walk" 
-                        + direction 
+                imagePath[i][j] = "pictures/"
+                        + this.player
+                        + "/walk"
+                        + direction
                         + j
                         + ".png";
             }
@@ -354,5 +354,5 @@ public class Entity {
     public boolean isWinner() {
         return winner;
     }
-    
+
 }

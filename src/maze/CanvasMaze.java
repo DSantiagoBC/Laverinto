@@ -18,11 +18,9 @@ public class CanvasMaze {
      */
     public static final int TILE_SIZE = 40;
     private MazeGenerator maze;
-    private ArrayList<Rectangle> paredes;
     private boolean[][] mazeWalls1, mazeWalls2;
 
     public CanvasMaze(int startX, int startY, int width, int height) {
-        this.paredes = new ArrayList<>();
         this.WIDTH = width;
         this.HEIGHT = height;
         this.maze = new RecursiveBacktracker(WIDTH, HEIGHT, startX, startY);

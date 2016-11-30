@@ -118,33 +118,33 @@ public class Execute extends Canvas implements KeyListener {
             if (left || right || up || down) {
                 player1.paint(g);
             } else {
-                player1.paintframe(g);
+                player1.paintFrame(g);
             }
             if (w || a || s || d) {
                 player2.paint(g);
             } else {
-                player2.paintframe(g);
+                player2.paintFrame(g);
             }
             if (player1.isWinner()) {
                 gameRunning = false;
                 g.setColor(Color.GREEN);
-                g.fillRect(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
-                g.drawImage(this.win, FRAME_WIDTH * 3 / 4 - this.win.getWidth(null) / 2
-                        , FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
+                g.fillRect(FRAME_WIDTH / 2, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+                g.drawImage(this.win, FRAME_WIDTH * 3 / 4 - this.win.getWidth(null) / 2,
+                         FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
                 g.setColor(Color.RED);
-                g.fillRect(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
-                g.drawImage(this.loose, FRAME_WIDTH / 4 - this.loose.getWidth(null) / 2
-                        , FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
+                g.fillRect(0, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+                g.drawImage(this.loose, FRAME_WIDTH / 4 - this.loose.getWidth(null) / 2,
+                         FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
             } else if (player2.isWinner()) {
                 gameRunning = false;
                 g.setColor(Color.RED);
-                g.fillRect(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
-                g.drawImage(this.loose, FRAME_WIDTH * 3 / 4 - this.loose.getWidth(null) / 2
-                        , FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
+                g.fillRect(FRAME_WIDTH / 2, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+                g.drawImage(this.loose, FRAME_WIDTH * 3 / 4 - this.loose.getWidth(null) / 2,
+                         FRAME_HEIGHT / 2 - this.loose.getHeight(null) / 2, null);
                 g.setColor(Color.GREEN);
-                g.fillRect(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT);
-                g.drawImage(this.win, FRAME_WIDTH / 4 - this.win.getWidth(null) / 2
-                        , FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
+                g.fillRect(0, 0, FRAME_WIDTH / 2, FRAME_HEIGHT);
+                g.drawImage(this.win, FRAME_WIDTH / 4 - this.win.getWidth(null) / 2,
+                         FRAME_HEIGHT / 2 - this.win.getHeight(null) / 2, null);
             }
             // flip the buffer so we can see the rendering
             g.dispose();
